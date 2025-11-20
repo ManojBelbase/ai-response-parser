@@ -1,3 +1,4 @@
+// types.ts
 export interface ColorTheme {
     codeBgLight?: string;
     codeBgDark?: string;
@@ -11,6 +12,14 @@ export interface ColorTheme {
     copyButtonHover?: string;
     linkColor?: string;
     headingColor?: string;
+
+    // Syntax highlighting
+    keyword?: string;
+    string?: string;
+    number?: string;
+    comment?: string;
+    function?: string;
+    operator?: string;
 }
 
 export interface AIResponseParserProps {
@@ -24,5 +33,5 @@ export interface CodeBlockProps {
     language: string;
     code: string;
     theme: Required<ColorTheme>;
-    darkMode: boolean;
+    darkMode?: boolean;
 }
