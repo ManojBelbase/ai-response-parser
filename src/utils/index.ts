@@ -1,1 +1,1 @@
-export * from './markdownParser.ts'
+export * from './markdownParser'
