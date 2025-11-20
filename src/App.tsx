@@ -1,10 +1,12 @@
 
-import './App.css'
+import Example from './examples/Example'
 
 function App() {
 
   return (
-    <div>Helllo</div>
+    <div>
+      <Example />
+    </div>
   )
 }
 
