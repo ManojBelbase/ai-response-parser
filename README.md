@@ -1,73 +1,122 @@
-# React + TypeScript + Vite
+# `ai-response-parser` — The Beautiful Grok-Style AI Message Renderer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Zero dependencies • Full Markdown • Custom colors • React 17-19
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install ai-response-parser
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+yarn add ai-response-parser
 ```
+
+```bash
+pnpm add ai-response-parser
+```
+
+## Why You'll Love It
+
+- Looks exactly like **Grok / Claude / ChatGPT**
+- Perfect code blocks with **Copy** button (Copied! feedback)
+- Full markdown support: **bold**, *italic*, `inline code`, links, headings, blockquotes, lists
+- Super lightweight — **no marked, no Prism, no heavy deps**
+- Fully customizable colors
+- Works with **Next.js, Vite, CRA, Remix, Astro**
+
+## Installation
+
+```bash
+npm install ai-response-parser
+```
+
+## Usage
+
+```tsx
+import AIResponseParser from 'ai-response-parser';
+
+function ChatMessage({ content }: { content: string }) {
+  return (
+    <AIResponseParser 
+      content={content}
+      darkMode={true}
+      colors={{
+        copyButtonBg: "#10b981",     // Grok green
+        copyButtonHover: "#059669",
+        linkColor: "#60a5fa",
+        headingColor: "#fbbf24",
+      }}
+    />
+  );
+}
+```
+
+## Props
+
+| Prop         | Type                        | Default       | Description                         |
+|--------------|-----------------------------|---------------|-------------------------------------|
+| `content`    | `string`                    | Required      | AI response (markdown)              |
+| `darkMode`   | `boolean`                   | `true`        | Dark / light mode                   |
+| `colors`     | `Partial<ColorTheme>`       | Built-in      | Customize everything                |
+| `className`  | `string`                    | `''`          | Extra CSS classes                   |
+
+### ColorTheme (All customizable!)
+
+```ts
+{
+  codeBgLight?: string;
+  codeBgDark?: string;
+  codeBorderLight?: string;
+  codeBorderDark?: string;
+  textLight?: string;
+  textDark?: string;
+  inlineCodeBgLight?: string;
+  inlineCodeBgDark?: string;
+  copyButtonBg?: string;
+  copyButtonHover?: string;
+  linkColor?: string;
+  headingColor?: string;
+}
+```
+
+## Example
+
+```tsx
+<AIResponseParser
+  content={`
+**Hello!** I'm your AI assistant.
+
+### Features
+- **Bold** and *italic*
+- \`console.log('Hello')\`
+- [Google](https://google.com)
+
+> Beautiful blockquotes
+
+\`\`\`javascript
+console.log("This works perfectly!");
+alert("Copied button too!");
+\`\`\`
+  `}
+  darkMode
+  colors={{
+    copyButtonBg: "#8b5cf6",   // Claude purple
+    linkColor: "#c4b5fd"
+  }}
+/>
+```
+
+## CDN (No install needed!)
+
+```html
+<script type="module">
+  import AIResponseParser from 'https://cdn.jsdelivr.net/npm/ai-response-parser/dist/index.js';
+  
+  const root = ReactDOM.createRoot(document.getElementById('app'));
+  root.render(React.createElement(AIResponseParser, {
+    content: "**Hello from CDN!** ```js\nconsole.log('Works!')\n```",
+    darkMode: true
+  }));
+</script>
+```
+
+## Made with ❤️ by Manoj Blebase
