@@ -23,7 +23,7 @@ export const CodeBlock: React.FC<{
                     onClick={handleCopy}
                     className={`ai-copy-btn ${copied ? "copied" : ""}`}
                 >
-                    {copied ? "Copied!" : "Copy"}
+                    {copied ? "Copied" : "Copy"}
                 </button>
             </div>
             <pre className="ai-code-pre">

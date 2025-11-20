@@ -35,3 +35,25 @@ export interface CodeBlockProps {
     theme: Required<ColorTheme>;
     darkMode?: boolean;
 }
+export interface AIResponseParserPropsExtended extends AIResponseParserProps {
+    themeName?: 'vscode' | 'monokai' | 'dracula' | 'github' | 'oneDark';
+}
+
+export interface Token {
+    type: string;
+    value: string;
+    start: number;
+    end: number;
+    priority: number;
+}
+
+export interface Theme {
+    comment: string;
+    string: string;
+    keyword: string;
+    number: string;
+    function: string;
+    operator: string;
+    punctuation?: string;
+    property?: string;
+}

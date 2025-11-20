@@ -1,16 +1,20 @@
 import React from 'react';
 import { parseMarkdown } from './utils/markdownParser';
-import { getThemeStyles, defaultTheme } from './styles/theme.css';
-import type { AIResponseParserProps } from './types';
+import { getThemeStyles, defaultTheme, themes } from './styles/theme.css';
+import { AIResponseParserPropsExtended } from './types';
 import { CodeBlock } from './components/CodeBlock';
 
-const AIResponseParser: React.FC<AIResponseParserProps> = ({
+
+
+export const AIResponseParser: React.FC<AIResponseParserPropsExtended> = ({
     content,
     darkMode = true,
     colors = {},
     className = '',
+    themeName = 'oneDark',
 }) => {
-    const theme = { ...defaultTheme, ...colors };
+    const baseTheme = themes[themeName] || defaultTheme;
+    const theme = { ...baseTheme, ...colors };
 
     const parts = content.split(/(```[\w-]*\n[\s\S]*?```)/g);
 
@@ -31,5 +35,3 @@ const AIResponseParser: React.FC<AIResponseParserProps> = ({
         </div>
     );
 };
-
-export default AIResponseParser;

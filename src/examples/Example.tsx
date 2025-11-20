@@ -35,11 +35,8 @@ const Example = () => {
                 <AIResponseParser
                     content={grokStyleResponse}
                     darkMode={true}
-                    colors={{
-
-
-
-                    }}
+                    className=''
+                    themeName='github'
                 />
             </div>
         </div>

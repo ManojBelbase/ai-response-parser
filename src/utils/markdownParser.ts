@@ -1,5 +1,4 @@
 export const parseMarkdown = (text: string): string => {
-    // Group bullet lists before anything else
     text = text.replace(
         /(^[*\-•] .+(?:\n[*\-•] .+)*)/gm,
         match => {
