@@ -42,12 +42,33 @@
     "typescript-eslint": "^8.47.0",
     "vite": "^7.2.4"
   },
-  "description": "",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/",
     "types/",
     "README.md"
-  ]
+  ],
+    "description": "React AI response parser: Markdown & code highlighter with dark mode. Ideal for AI code converter, AI coder, code parser, and AI code formatter.",
+  "keywords": [
+    "react",
+    "ai",
+    "ai-coder",
+    "ai-code-parser",
+    "ai-code-formatter",
+    "ai-code-converter",
+    "markdown",
+    "syntax-highlighting",
+    "code-highlighter",
+    "react-component",
+    "code-snippets",
+    "marker"
+  ],
+  "homepage": "https://www.npmjs.com/package/ai-response-parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ManojBelbase/ai-response-parser"
+  },
+  "author": "Manoj Belbase",
+  "license": "MIT"
 }

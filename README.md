@@ -1,7 +1,7 @@
 
 # 🧠 ai-response-parser
 
-A beautiful, lightweight React component that renders AI responses with **full Markdown support** and **syntax-highlighted code blocks**. Perfect for AI chatbots, coding assistants, tutorials, and documentation sites.
+A React component to render AI responses, including Markdown, syntax-highlighted code blocks, and dark mode support. Ideal as an AI code converter, AI coder tool, code formatter, or AI code parser in your React projects. 🚀
 
 Works instantly with React, Next.js, Vite, Remix, etc.
 
@@ -12,7 +12,6 @@ Works instantly with React, Next.js, Vite, Remix, etc.
 - Dark & Light mode
 - 5 stunning built-in themes: `vscode · monokai · dracula · github · oneDark`
 - Fully customizable colors
-- Tiny bundle size (~15kB gzipped)
 - Zero extra dependencies
 
 ## 📦 Installation
@@ -42,6 +41,7 @@ export default function App() {
   );
 }
 ```
+Response Format:
 ![alt text](image.png)
 
 ## 🛠 Props
@@ -119,12 +119,3 @@ MIT © [Manoj Belbase](https://github.com/manojbelbase) – Free for everyone!
  Issues · Feature requests · PRs are very welcome ❤️
 
 Made with love for the AI + React community by **Manoj Belbase**
-```
-
-Done!  
-No backslashes, no escaping nightmares, everything bold and beautiful, renders perfectly on GitHub & npm.
-
-Just create/replace your `README.md` with this and push — your package will look professional instantly! 🚀
-
-Need a logo or npm publish help next? Just say! 😊
-```
