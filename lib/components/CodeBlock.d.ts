@@ -1,3 +1,7 @@
 import React from "react";
-import type { CodeBlockProps } from "../types";
-export declare const CodeBlock: React.FC<CodeBlockProps>;
+export declare const CodeBlock: React.FC<{
+    language: string;
+    code: string;
+    theme: any;
+    darkMode?: boolean;
+}>;

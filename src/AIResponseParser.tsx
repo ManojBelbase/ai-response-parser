@@ -1,4 +1,3 @@
-// AIResponseParser.tsx
 import React from 'react';
 import { parseMarkdown } from './utils/markdownParser';
 import { getThemeStyles, defaultTheme } from './styles/theme.css';
@@ -11,7 +10,7 @@ const AIResponseParser: React.FC<AIResponseParserProps> = ({
     colors = {},
     className = '',
 }) => {
-    const theme = { ...defaultTheme, ...colors };   // ← one single source of truth
+    const theme = { ...defaultTheme, ...colors };
 
     const parts = content.split(/(```[\w-]*\n[\s\S]*?```)/g);
 

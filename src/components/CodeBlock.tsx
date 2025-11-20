@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { highlight } from "../utils";
+import { highlight } from "../utils/highlight";
 
 export const CodeBlock: React.FC<{
     language: string;
