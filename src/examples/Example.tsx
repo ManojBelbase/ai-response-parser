@@ -1,4 +1,4 @@
-import { AIResponseParser } from '../index';
+import { AIResponseParser } from 'ai-response-parser';
 
 const Example = () => {
 
@@ -32,12 +32,12 @@ const Example = () => {
                 />
 
                 <AIResponseParser
-                    content={newRes}
+                    content={response}
                     darkMode={true}
                 />
 
                 <AIResponseParser
-                    content={response}
+                    content={response2}
                     darkMode={true}
                     className=''
                     themeName='github'

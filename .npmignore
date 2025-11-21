@@ -1,0 +1,5 @@
+src/
+*.log
+*.test.tsx
+node_modules/
+.vscode/
