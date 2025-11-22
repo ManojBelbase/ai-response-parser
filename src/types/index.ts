@@ -47,13 +47,26 @@ export interface Token {
     priority: number;
 }
 
-export interface Theme {
+
+export type Theme = {
     comment: string;
     string: string;
     keyword: string;
-    number: string;
     function: string;
+    number: string;
+    boolean: string;
     operator: string;
-    punctuation?: string;
-    property?: string;
-}
+    punctuation: string;
+    property: string;
+    plain: string;
+
+    codeBg: string;
+    headerBg: string;
+    copyBtnBg: string;
+    copyBtnHover?: string;
+    copyBtnText: string;
+    scrollTrack?: string;
+    scrollThumb?: string;
+    scrollThumbHover?: string;
+
+};

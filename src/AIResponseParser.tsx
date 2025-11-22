@@ -1,44 +1,39 @@
-import React from 'react';
-import { parseMarkdown } from './utils/markdownParser';
-import { getThemeStyles, defaultTheme, themes } from './styles/theme.css';
-import { AIResponseParserPropsExtended } from './types';
-import { CodeBlock } from './components/CodeBlock';
+import React from "react";
+import { parseMarkdown } from "./utils/markdownParser";
+import { themes, ThemeName } from "./themes/themes";
+import { CodeBlock } from "./components/CodeBlock";
+import { getThemeStyles } from "./styles/theme.css";
 
-export const AIResponseParser: React.FC<AIResponseParserPropsExtended> = ({
+type Props = {
+    content: string;
+    themeName?: ThemeName;
+    textColor?: string;
+    className?: string;
+};
+
+export const AIResponseParser: React.FC<Props> = ({
     content,
-    darkMode = true,
-    colors = {},
+    themeName = "tomorrowNight",
+    textColor = "#000",
     className = "",
-    themeName = "oneDark",
 }) => {
-    const baseTheme = themes[themeName] || defaultTheme;
-    const theme = { ...baseTheme, ...colors };
+    const theme = themes[themeName];
 
-    // Split content into code blocks / text blocks
     const parts = content.split(/(```[\w-]*\n[\s\S]*?```)/g);
 
     return (
         <div className={`ai-parser-root ${className}`}>
-            <style dangerouslySetInnerHTML={{ __html: getThemeStyles(theme, darkMode) }} />
+            <style dangerouslySetInnerHTML={{ __html: getThemeStyles(theme, textColor) }} />
 
             {parts.map((part, i) => {
                 const match = part.match(/```(\w*)\n?([\s\S]*?)```/);
                 if (match) {
                     const lang = (match[1] || "text").trim();
                     const code = match[2].trim();
-                    return (
-                        <CodeBlock
-                            key={i}
-                            language={lang}
-                            code={code}
-                            theme={theme}
-                            darkMode={darkMode}
-                        />
-                    );
+                    return <CodeBlock key={i} language={lang} code={code} theme={theme} />;
                 }
 
                 if (!part.trim()) return null;
-
                 return (
                     <div
                         key={i}
