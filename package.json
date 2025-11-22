@@ -1,68 +1,25 @@
 {
   "name": "ai-response-parser",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
-  "scripts": {
-    "build": "rollup -c --configPlugin @rollup/plugin-typescript",
-    "build:types": "tsc --emitDeclarationOnly",
-    "dev": "vite",
-    "prepare": "npm run build",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@babel/core": "^7.28.4",
-    "@babel/preset-env": "^7.28.3",
-    "@babel/preset-react": "^7.27.1",
-    "@rollup/plugin-babel": "^6.1.0",
-    "@rollup/plugin-image": "^3.0.3",
-    "ai-response-parser": "^1.2.0",
-    "react": "^17.0.0 || ^19.0.0",
-    "react-dom": "^19.1.1",
-    "rollup-plugin-postcss": "^4.0.2"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.3.0",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.6",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "rollup": "^4.53.3",
-    "ts-node": "^10.9.2",
-    "tslib": "^2.8.1",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.47.0",
-    "vite": "^7.2.4"
-  },
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib/",
-    "types/",
-    "README.md"
-  ],
-  "description": "React AI response parser: Markdown & code highlighter with dark mode. Ideal for AI code converter, AI coder, code parser, and AI code formatter.",
+  "description": "React AI response parser — Markdown renderer with code highlighting, themes, and clean output. Ideal for AI code converter, AI coder, AI formatter, and AI code parser.",
   "keywords": [
     "react",
+    "markdown",
+    "code-highlighting",
+    "syntax-highlighting",
     "ai",
     "ai-coder",
     "ai-code-parser",
     "ai-code-formatter",
     "ai-code-converter",
-    "markdown",
-    "syntax-highlighting",
-    "code-highlighter",
-    "react-component",
     "code-snippets",
-    "marker"
+    "markdown-parser",
+    "react-component",
+    "code-block",
+    "chatgpt-ui",
+    "ai-tools",
+    "developer-tools"
   ],
   "homepage": "https://www.npmjs.com/package/ai-response-parser",
   "repository": {
@@ -70,5 +27,43 @@
     "url": "https://github.com/ManojBelbase/ai-response-parser"
   },
   "author": "Manoj Belbase",
-  "license": "MIT"
+  "license": "MIT",
+
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "files": ["lib/", "types/", "README.md"],
+
+  "scripts": {
+    "build": "rollup -c --configPlugin @rollup/plugin-typescript",
+    "build:types": "tsc --emitDeclarationOnly",
+    "dev": "vite",
+    "prepare": "npm run build",
+    "lint": "eslint ."
+  },
+
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
+  },
+
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "rollup": "^4.53.3",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.47.0",
+    "vite": "^7.2.4"
+  }
 }

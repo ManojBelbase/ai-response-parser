@@ -1,20 +1,11 @@
 
-# 🧠 ai-response-parser
+# AI Response Parser
 
-A React component to render AI responses, including Markdown, syntax-highlighted code blocks, and dark mode support. Ideal as an AI code converter, AI coder tool, code formatter, or AI code parser in your React projects. 🚀
+**A tiny, zero-dependency React component that beautifully renders AI responses with full Markdown and syntax-highlighted code blocks.**
 
-Works instantly with React, Next.js, Vite, Remix, etc.
+Super lightweight • Zero dependencies • 9 stunning themes • Streaming ready
 
-## ✨ Features
-
-- Full Markdown (headers, **bold**, *italic*, lists, links, tables, quotes)
-- Automatic syntax highlighting for 100+ languages
-- Dark & Light mode
-- 5 stunning built-in themes: `vscode · monokai · dracula · github · oneDark`
-- Fully customizable colors
-- Zero extra dependencies
-
-## 📦 Installation
+## Installation
 
 ```bash
 npm install ai-response-parser
@@ -24,98 +15,111 @@ yarn add ai-response-parser
 pnpm add ai-response-parser
 ```
 
-## 🚀 Basic Usage
+
+## Features
+
+- Full Markdown support (headings, bold, lists, tables, quotes, links)  
+- Syntax highlighting — no Prism/Highlight.js  
+- **9 gorgeous built-in themes**  
+- Streaming friendly (perfect for AI chat apps)  
+- Copy-ready code blocks
+
+---
+
+
+
+---
+
+## Basic Usage
 
 ```tsx
 import { AIResponseParser } from 'ai-response-parser';
 
-    const response = "```javascript\nfunction factorial(n) {\n  // Base case: factorial of 0 is 1\n  if (n === 0) {\n    return 1;\n  } else if (n < 0) {\n    return \"Factorial is not defined for negative numbers\";\n  } else {\n    // Recursive case: n! = n * (n-1)!\n    return n * factorial(n - 1);\n  }\n}\n\n// Example usage:\nconst number = 5;\nconst result = factorial(number);\nconsole.log(`The factorial of ${number} is ${result}`); // Output: The factorial of 5 is 120\n\n// Iterative approach (alternative)\nfunction factorialIterative(n) {\n    if (n === 0) {\n        return 1;\n    } else if (n < 0) {\n        return \"Factorial is not defined for negative numbers\";\n    }\n    let result = 1;\n    for (let i = 1; i <= n; i++) {\n        result *= i;\n    }\n    return result;\n}\n\nconst iterativeResult = factorialIterative(number);\nconsole.log(`The factorial of ${number} (iterative) is ${iterativeResult}`); // Output: The factorial of 5 (iterative) is 120\n\n```\n\nThis code provides both a recursive and iterative approach to calculating the factorial of a number in JavaScript.  It also includes error handling for negative inputs.\n\nNow, how would you like to use this?  For example, do you want to:\n\n1.  Integrate this into a React component?\n2.  Calculate factorials on a server using Node.js?\n3.  Optimize it further for very large numbers (using BigInt)?\n4.  Use it inside a Next.js API route?\n\nLet me know, and I'll provide the best code and practices.\n"
+const aiMessage = `
+Here's a factorial function in JavaScript:
 
+\`\`\`javascript
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+console.log(factorial(5)); // 120
+\`\`\`
 
-export default function App() {
+Want BigInt support or an iterative version too?
+`;
+
+export default function ChatBubble() {
   return (
-    <div className="min-h-screen bg-black p-10 text-white">
-      <h1 className="text-3xl mb-8">AI Response Parser Demo</h1>
-      <AIResponseParser content={response} darkMode={true} themeName="oneDark" />
+    <div className="max-w-3xl mx-auto p-8>
+      <AIResponseParser
+        content={aiMessage}
+        themeName="onedark"
+        textColor="#e2e8f0"
+      />
     </div>
   );
 }
 ```
-Response Format:
-![alt text](image.png)
 
-## 🛠 Props
+![alt text](image-1.png)
 
-| Prop        | Type                                              | Default    | Description                          |
-|-------------|---------------------------------------------------|------------|--------------------------------------|
-| `content`   | `string`                                          | —          | Required – Your AI response text     |
-| `darkMode`  | `boolean`                                         | `true`     | Dark mode on/off                     |
-| `themeName` | `"vscode" \| "monokai" \| "dracula" \| "github" \| "oneDark"` | `"oneDark"` | Built-in theme                |
-| `colors`    | `Partial<Theme>`                                  | `{}`       | Override any color                   |
-| `className` | `string`                                          | `""`       | Extra CSS classes                    |
+---
 
-## 🎨 Built-in Themes
+## Props
 
-- **vscode** 💻**
-- **monokai** 🌙
-- **dracula** 🧛‍♂️
-- **github** 🐱 (great for light mode)
-- **oneDark** 🌑 (default – most popular)
+| Prop        | Type       | Default     | Description                                      |
+|-------------|------------|-------------|--------------------------------------------------|
+| `content`   | `string`   | —           | Required — Your AI response (Markdown + code)    |
+| `themeName` | `string`   | `"onedark"` | Choose from 9 themes                             |
+| `textColor` | `string`   | —           | Text color outside code blocks (hex, rgb, etc.)  |
+| `className` | `string`   | —           | Add Tailwind or custom classes                   |
 
-## 💡 More Examples
+---
 
-### Multiple Languages
+## 9 Built-in Themes
 
-```tsx
-const example = `
-**JavaScript**
-\`\`\`javascript
-const fibonacci = n => n <= 1 ? n : fibonacci(n-1) + fibonacci(n-2);
-\`\`\`
+| Theme              | Preview                                   |
+|--------------------|------------------------------------------|
+| `onedark`          | Default dark — clean & modern            |
+| `dracula`          | Purple power — bold & beautiful          |
+| `nord`             | Arctic, calm & minimalist                |
+| `vscode`           | Classic VS Code style                    |
+| `monokai`          | Retro Sublime vibes                      |
+| `github`           | Clean light theme                        |
+| `solarizedDark`    | Perfect contrast & eye comfort           |
+| `tomorrowNight`    | Soft glow — easy on the eyes             |
+| `light`            | Pure bright mode                         |
 
-**Python**
-\`\`\`python
-def fibonacci(n):
-    return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)
-\`\`\`
+---
 
-**Rust**
-\`\`\`rust
-fn fibonacci(n: u32) -> u32 {
-    match n {
-        0 | 1 => n,
-        _ => fibonacci(n-1) + fibonacci(n-2),
-    }
-}
-\`\`\`
-`;
-
-<AIResponseParser content={example} themeName="dracula" />
-```
-
-### Light Mode Example
+## More Examples
 
 ```tsx
 <AIResponseParser
   content={response}
-  darkMode={false}
-  themeName="github"
+  themeName="nord"
+  textColor="#d8dee9"
+  className="prose prose-invert max-w-none"
 />
 ```
 
-## 🔥 Tips
-
-- Works perfectly with streaming responses (just update the `content` prop)
-- Combine with Tailwind CSS for even prettier layouts
-- Code blocks are copy-to-clipboard ready (optional button coming soon)
-
-## 📝 License
-
-MIT © [Manoj Belbase](https://github.com/manojbelbase) – Free for everyone!
+Works perfectly with **Tailwind CSS**, **Next.js**, **Vite**, **Remix**, and more!
 
 ---
 
-⭐ If this saved you time, please give it a star on GitHub!  
- Issues · Feature requests · PRs are very welcome ❤️
 
-Made with love for the AI + React community by **Manoj Belbase**
+## License
+
+**MIT**  © [Manoj Belbase](https://github.com/manojbelbase)
+
+Free for everyone — personal & commercial use!
+
+---
+
+**Love it? Star us on GitHub!**  
+[https://github.com/ManojBelbase/ai-response-parser](https://github.com/ManojBelbase/ai-response-parser)
+
+Issues · Feature requests · PRs very welcome
+
+Made with love for the **React + AI** community by **Manoj Belbase**
