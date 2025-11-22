@@ -1,35 +1,39 @@
 {
   "name": "ai-response-parser",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "type": "module",
-  "description": "React AI response parser — Markdown renderer with code highlighting, themes, and clean output. Ideal for AI code converter, AI coder, AI formatter, and AI code parser.",
+  "description": "React AI Response Parser — Render Markdown with syntax-highlighted code blocks, themes, and dark mode. Ideal for AI code converter, AI coder, code formatter, and code parser in React projects.",
   "keywords": [
     "react",
-    "markdown",
-    "code-highlighting",
-    "syntax-highlighting",
     "ai",
     "ai-coder",
     "ai-code-parser",
     "ai-code-formatter",
     "ai-code-converter",
-    "code-snippets",
+    "markdown",
     "markdown-parser",
-    "react-component",
+    "syntax-highlighting",
+    "code-highlighting",
+    "code-snippets",
     "code-block",
     "chatgpt-ui",
+    "developer-tools",
     "ai-tools",
-    "developer-tools"
+    "react-component"
   ],
   "homepage": "https://www.npmjs.com/package/ai-response-parser",
   "repository": {
     "type": "git",
     "url": "https://github.com/ManojBelbase/ai-response-parser"
   },
+  "bugs": {
+    "url": "https://github.com/ManojBelbase/ai-response-parser/issues"
+  },
   "author": "Manoj Belbase",
   "license": "MIT",
 
   "module": "lib/index.esm.js",
+  "main": "lib/index.cjs.js",
   "types": "lib/index.d.ts",
   "files": ["lib/", "types/", "README.md"],
 
