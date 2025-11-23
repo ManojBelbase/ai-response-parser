@@ -1,46 +1,24 @@
-# Don't publish source files
-src/
-examples/
-demo/
-public/
-dist/
-build/
+1. Source Code (Keep in repository, exclude from NPM)
+/src
 
-# Configs
-# Build / Tooling configs
-rollup.config.*
-vite.config.*
+# 2. Configuration Files (Essential for development, not runtime)
+babel.config.cjs
+eslint.config.js
+rollup.config.ts
+tsconfig.app.json
 tsconfig.json
-tsconfig.*.json
-eslint.config.*
-.eslintrc*
-prettier.config.*
-prettier.*
-babel.config.*
-postcss.config.*
-jest.config.*
+tsconfig.node.json
+vite.config.ts
 
+# 3. Development/Lock Files
+package-lock.json
+pnpm-lock.yaml
+.npmignore
+.gitignore
 
-# Environment
-.env*
-.vscode/
-.idea/
+# 4. Local Development Assets (Unless they are part of the distributed assets in /dist)
+image-1.png
+index.html
 
-# Node stuff
-node_modules/
-*.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Tests
-*.test.*
-*.spec.*
-__tests__/
-coverage/
-
-# Anything unnecessary
-*.md.bak
-*.tmp
-*.cache
+# 5. Automatically Ignored (Good practice to list, but usually ignored anyway)
+/node_modules

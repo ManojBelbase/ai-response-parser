@@ -1,10 +1,9 @@
 {
   "name": "ai-response-parser",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "description": "React AI Response Parser — Render Markdown with syntax-highlighted code blocks, themes, and dark mode. Ideal for AI code converter, AI coder, code formatter, and code parser in React projects.",
   "keywords": [
-    "react",
     "ai",
     "ai-coder",
     "ai-code-parser",
@@ -17,9 +16,7 @@
     "code-snippets",
     "code-block",
     "chatgpt-ui",
-    "developer-tools",
-    "ai-tools",
-    "react-component"
+    "ai-tools"
   ],
   "homepage": "https://www.npmjs.com/package/ai-response-parser",
   "repository": {
@@ -56,10 +53,10 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@vitejs/plugin-react": "^5.1.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",

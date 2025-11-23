@@ -32,7 +32,8 @@ const Example = () => {
                 />
                 <AIResponseParser
                     content={response2}
-                    textColor='#fff'
+                    textColor='#000'
+                    themeName='github'
                 />
 
             </div>

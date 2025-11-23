@@ -50,12 +50,14 @@ export function parseMarkdown(text: string): string {
 
         if (taskMatch) {
             if (!inUnorderedList) {
-                processed.push('<ul style="margin:8px 0;padding-left:20px;line-height:1.5;list-style:none">');
+                // List container: margin:0 removes vertical space before the list
+                processed.push('<ul style="margin:0;padding-left:20px;line-height:1.5;list-style:none">');
                 inUnorderedList = true;
             }
             const checked = taskMatch[1] === 'x';
-            processed.push(`<li style="margin-bottom:4px">
-          <input type="checkbox" ${checked ? 'checked' : ''} disabled style="margin-right:8px">
+            // List item: margin:0 ensures minimal space between items
+            processed.push(`<li style="margin:0;padding-left:4px">
+          <input type="checkbox" ${checked ? 'checked' : ''} disabled style="margin-right:8px;vertical-align:middle">
           <span style="${checked ? 'text-decoration:line-through;color:#8b949e' : ''}">${taskMatch[2]}</span>
       </li>`);
         } else if (unorderedMatch) {
@@ -64,20 +66,24 @@ export function parseMarkdown(text: string): string {
                 inOrderedList = false;
             }
             if (!inUnorderedList) {
-                processed.push('<ul style="margin:8px 0;padding-left:20px;line-height:1.5">');
+                // List container: margin:0 removes vertical space before the list
+                processed.push('<ul style="margin:0;padding-left:20px;line-height:1.5">');
                 inUnorderedList = true;
             }
-            processed.push(`<li style="margin-bottom:4px;padding-left:4px">${unorderedMatch[1]}</li>`);
+            // List item: margin:0 ensures minimal space between items
+            processed.push(`<li style="margin:0;padding-left:4px">${unorderedMatch[1]}</li>`);
         } else if (orderedMatch) {
             if (inUnorderedList) {
                 processed.push('</ul>');
                 inUnorderedList = false;
             }
             if (!inOrderedList) {
-                processed.push('<ol style="margin:8px 0;padding-left:20px;line-height:1.5">');
+                // List container: margin:0 removes vertical space before the list
+                processed.push('<ol style="margin:0;padding-left:20px;line-height:1.5">');
                 inOrderedList = true;
             }
-            processed.push(`<li style="margin-bottom:4px;padding-left:4px">${orderedMatch[1]}</li>`);
+            // List item: margin:0 ensures minimal space between items
+            processed.push(`<li style="margin:0;padding-left:4px">${orderedMatch[1]}</li>`);
         } else {
             if (inUnorderedList) {
                 processed.push('</ul>');
@@ -96,7 +102,7 @@ export function parseMarkdown(text: string): string {
 
     html = processed.join('\n');
 
-    // Paragraphs
+    // Paragraphs (FIXED: margin:0 now removes both top and bottom gaps)
     html = html.split('\n\n').map(p => {
         const trimmed = p.trim();
         if (!trimmed ||
@@ -108,7 +114,8 @@ export function parseMarkdown(text: string): string {
             trimmed.startsWith('<img')) {
             return p;
         }
-        return `<p style="margin-bottom:12px;line-height:1.6">${p.replace(/\n/g, '<br>')}</p>`;
+        // Changed margin-bottom:0 to margin:0 to remove both top and bottom gaps
+        return `<p style="margin:0;line-height:1.6">${p.replace(/\n/g, '<br>')}</p>`;
     }).join('');
 
     return html;

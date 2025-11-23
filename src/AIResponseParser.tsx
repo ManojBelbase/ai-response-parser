@@ -35,7 +35,7 @@ export const AIResponseParser: React.FC<Props> = ({
                 return (
                     <div
                         key={i}
-                        className="ai-text"
+                        className={className}
                         dangerouslySetInnerHTML={{ __html: parseMarkdown(part) }}
                     />
                 );
