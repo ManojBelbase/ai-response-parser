@@ -4,7 +4,6 @@ import { Token } from "../types";
 export function tokenize(code: string): Token[] {
     const matches: Token[] = [];
 
-    // Find all matches for all patterns
     Object.entries(PATTERNS).forEach(([type, { regex, priority }]) => {
         const pattern = new RegExp(regex.source, regex.flags);
         let match;
@@ -20,13 +19,11 @@ export function tokenize(code: string): Token[] {
         }
     });
 
-    // Sort by position, then by priority
     matches.sort((a, b) => {
         if (a.start !== b.start) return a.start - b.start;
         return a.priority - b.priority;
     });
 
-    // Remove overlapping matches (keep higher priority)
     const nonOverlapping: Token[] = [];
     let lastEnd = 0;
 

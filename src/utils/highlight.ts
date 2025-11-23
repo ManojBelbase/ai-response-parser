@@ -2,7 +2,7 @@ import { Theme } from "../types";
 import { escapeHtml } from "./escapeHtml";
 import { tokenize } from "./tokenize";
 
-export const highlight = (code: string, theme: Theme): string => {
+export function highlight(code: string, theme: Theme): string {
     const tokens = tokenize(code);
     let html = "";
     let pos = 0;
@@ -12,7 +12,6 @@ export const highlight = (code: string, theme: Theme): string => {
             html += escapeHtml(code.slice(pos, token.start));
         }
 
-        // Ensure token.type exists in theme
         const color = theme[token.type as keyof Theme] ?? theme.keyword;
         html += `<span style="color:${color}">${escapeHtml(token.value)}</span>`;
 
@@ -24,4 +23,4 @@ export const highlight = (code: string, theme: Theme): string => {
     }
 
     return html;
-};
+}

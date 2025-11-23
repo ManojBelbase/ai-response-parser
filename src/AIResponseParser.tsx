@@ -19,15 +19,13 @@ export const AIResponseParser: React.FC<Props> = ({
 }) => {
     const theme = themes[themeName];
 
-    const parts = content.split(/(```[\w-]*\n[\s\S]*?```)/g);
-
+    const parts = content.split(/(```[^\n]*\n[\s\S]*?```)/g);
     return (
         <div className={`ai-parser-root ${className}`}>
             <style dangerouslySetInnerHTML={{ __html: getThemeStyles(theme, textColor) }} />
 
             {parts.map((part, i) => {
-                const match = part.match(/```(\w*)\n?([\s\S]*?)```/);
-                if (match) {
+                const match = part.match(/```(\w*)\n?([\s\S]*?)```/); if (match) {
                     const lang = (match[1] || "text").trim();
                     const code = match[2].trim();
                     return <CodeBlock key={i} language={lang} code={code} theme={theme} />;
