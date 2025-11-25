@@ -2,21 +2,35 @@ import { Theme } from "../types";
 
 export function getThemeStyles(theme: Theme, textColor: string) {
   return `
-    /* Root container */
+    /* Root container - only set base font and color */
     .ai-parser-root {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.7;
       color: ${textColor};
     }
 
-    /* All text outside code blocks */
-    .ai-text, .ai-text * {
-      color: ${textColor} !important;
+    /* Tables need explicit borders (browsers don't style them by default) */
+    .ai-parser-root table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 16px 0;
     }
 
-    /* Code block container */
+    .ai-parser-root th,
+    .ai-parser-root td {
+      border: 1px solid #e1e4e8;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .ai-parser-root th {
+      background-color: #f6f8fa;
+      font-weight: 600;
+    }
+
+    /* Code blocks need full styling (browsers don't style them well) */
     .ai-code-block {
-      margin: 10px 0;
+      margin: 16px 0;
       border-radius: 8px;
       overflow: hidden;
       background: ${theme.codeBg};
@@ -53,36 +67,33 @@ export function getThemeStyles(theme: Theme, textColor: string) {
     .ai-copy-btn:hover {
       background: ${theme.copyBtnHover};
     }
-  .ai-code-pre {
-  margin: 0;
-  padding: 16px;
-  overflow-x: auto;
-  background: ${theme.codeBg};
 
-  /* Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: ${theme.scrollThumb} ${theme.scrollTrack};
-}
+    .ai-code-pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background: ${theme.codeBg};
+      scrollbar-width: thin;
+      scrollbar-color: ${theme.scrollThumb} ${theme.scrollTrack};
+    }
 
-/* Chrome / Edge / Safari */
-.ai-code-pre::-webkit-scrollbar {
-  height: 2px;
-}
+    .ai-code-pre::-webkit-scrollbar {
+      height: 2px;
+    }
 
-.ai-code-pre::-webkit-scrollbar-track {
-  background: ${theme.scrollTrack};
-  border-radius: 2px;
-}
+    .ai-code-pre::-webkit-scrollbar-track {
+      background: ${theme.scrollTrack};
+      border-radius: 2px;
+    }
 
-.ai-code-pre::-webkit-scrollbar-thumb {
-  background: ${theme.scrollThumb};
-  border-radius: 4px;
-}
+    .ai-code-pre::-webkit-scrollbar-thumb {
+      background: ${theme.scrollThumb};
+      border-radius: 4px;
+    }
 
-.ai-code-pre::-webkit-scrollbar-thumb:hover {
-  background: ${theme.scrollThumbHover};
-}
-
+    .ai-code-pre::-webkit-scrollbar-thumb:hover {
+      background: ${theme.scrollThumbHover};
+    }
 
     .ai-code-pre code {
       font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;

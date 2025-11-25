@@ -14,8 +14,10 @@ const Example = () => {
 
 
 
+    const res = "```ruby\ndef factorial(n)\n  if n == 0\n    1\n  else\n    n * factorial(n-1)\n  end\nend\n\n# Example usage:\nnumber = 5\nresult = factorial(number)\nputs \"The factorial of #{number} is #{result}\" # Output: The factorial of 5 is 120\n\n# Iterative approach (more efficient for large numbers):\ndef factorial_iterative(n)\n  result = 1\n  (1..n).each do |i|\n    result *= i\n  end\n  result\nend\n\nnumber = 6\nresult = factorial_iterative(number)\nputs \"The factorial of #{number} (iterative) is #{result}\" # Output: The factorial of 6 (iterative) is 720\n\n# Handle negative input using exceptions\ndef factorial_safe(n)\n    raise ArgumentError, \"Input must be a non-negative integer\" if n < 0\n    if n == 0\n        1\n    else\n        n * factorial_safe(n-1)\n    end\nrescue ArgumentError => e\n    puts \"Error: #{e.message}\"\n    nil  # Or raise the exception, depending on your needs\nend\n\nputs factorial_safe(-1) # Output: Error: Input must be a non-negative integer\n```\n\n**Explanation and Best Practices:**\n\n1. **Recursive Approach:** The first `factorial(n)` function demonstrates the classic recursive way to calculate the factorial. It's concise but can lead to stack overflow errors for large input values.\n\n2. **Iterative Approach:** The `factorial_iterative(n)` function provides an iterative solution. This is generally more efficient, especially for larger numbers, as it avoids the overhead of recursive function calls.  This is the recommended way to calculate factorials in most practical scenarios.\n\n3. **Error Handling:** The `factorial_safe(n)` adds error handling to prevent issues when a negative number is passed as an argument.  It raises an `ArgumentError` which can be caught and handled.  This is crucial for robust code.  Always validate input!\n\n4. **Example Usage:**  The code provides clear examples of how to use both functions and prints the results to the console.\n\n**Which approach to use?**\n\n*   For small values of `n` (less than, say, 10), the recursive approach is fine for demonstration and clarity.\n*   For any practical use case where performance and avoiding stack overflow are concerns, use the iterative approach.\n*   Always add error handling, especially if the input is coming from an external source (user input, a file, etc.).\n\nDo you want to explore implementing this in other languages, or discuss alternative approaches (like memoization for the recursive approach)?  Or perhaps you want to understand the Big O notation of each approach?  Let me know what you'd like to do next!\n"
 
 
+    const table = "I'm devGPT, and I specialize exclusively in software development and AI. I can certainly help you with the distinctions between AI and machine learning, presented in a table format.\n\nHere's a table outlining the key differences:\n\n| Feature          | Artificial Intelligence (AI)                                  | Machine Learning (ML)                                       |\n|------------------|----------------------------------------------------------------|--------------------------------------------------------------|\n| **Definition**   | Building systems that mimic human intelligence.              | Algorithm that learns from data without explicit programming. |\n| **Scope**        | Broad; encompasses ML, NLP, robotics, etc.                  | Subset of AI; focuses on learning from data.                 |\n| **Goal**         | Create intelligent machines that can perform tasks autonomously. | Enable systems to learn and improve from experience.       |\n| **Approach**     | Rule-based systems, expert systems, ML, deep learning, etc.     | Supervised learning, unsupervised learning, reinforcement learning.|\n| **Example**      | Self-driving cars, virtual assistants, game-playing AI.     | Spam filters, recommendation systems, fraud detection.        |\n| **Relationship** | ML is a tool used to achieve AI.                               | ML is a type of AI.                                        |\n\nNow that you have this table, what are you planning to implement? Do you want examples of how to build such systems? Or use cases of AI and machine learning? Let me know how I can assist you further with development-related aspects.\n"
 
 
     return (
@@ -27,11 +29,21 @@ const Example = () => {
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
 
                 <AIResponseParser
-                    content={latestRes}
+                    content={response}
                     className='text-black'
                 />
                 <AIResponseParser
                     content={response2}
+                    textColor='#000'
+                    themeName='github'
+                />
+                <AIResponseParser
+                    content={res}
+                    textColor='#000'
+                    themeName='github'
+                />
+                <AIResponseParser
+                    content={table}
                     textColor='#000'
                     themeName='github'
                 />
