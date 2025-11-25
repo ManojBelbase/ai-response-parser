@@ -1,5 +1,5 @@
 import { CodeBlock } from "./components";
-import { getThemeStyles } from "./styles/themeStyles";
+import { getThemeStyles } from "./styles";
 import { themes } from "./themes";
 import { parseMarkdown } from "./utils";
 

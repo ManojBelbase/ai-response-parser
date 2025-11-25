@@ -1,181 +1,167 @@
+// utils/parseMarkdown.ts
 import { escapeHtml } from "./escapeHtml";
 
-export function parseMarkdown(md: string): string {
-    if (!md.trim()) return '';
+export function parseMarkdown(text: string): string {
+    if (!text?.trim()) return "";
 
-    let output = md;
+    let html = escapeHtml(text);
 
-    // 1. Handle CODE BLOCKS first (preserve them)
-    const codeBlocks: string[] = [];
-    output = output.replace(/```([\s\S]*?)```/g, (match, code) => {
-        const placeholder = `__CODEBLOCK_${codeBlocks.length}__`;
-        codeBlocks.push(
-            `<pre><code>${escapeHtml(code.trim())}</code></pre>`
-        );
-        return placeholder;
-    });
+    // === Clean up common AI response artifacts ===
+    html = html
+        .replace(/\\n/g, '\n')
+        .replace(/\\\*/g, '*')
+        .replace(/\\_/g, '_')
+        .replace(/\\`/g, '`')
+        .replace(/\\\[/g, '[')
+        .replace(/\\\]/g, ']');
 
-    // 2. HEADINGS
-    output = output.replace(/^######\s+(.+)$/gm, "<h6>$1</h6>");
-    output = output.replace(/^#####\s+(.+)$/gm, "<h5>$1</h5>");
-    output = output.replace(/^####\s+(.+)$/gm, "<h4>$1</h4>");
-    output = output.replace(/^###\s+(.+)$/gm, "<h3>$1</h3>");
-    output = output.replace(/^##\s+(.+)$/gm, "<h2>$1</h2>");
-    output = output.replace(/^#\s+(.+)$/gm, "<h1>$1</h1>");
+    // === Headers ===
+    html = html.replace(/^### (.*$)/gim, "<h3>$1</h3>");
+    html = html.replace(/^## (.*$)/gim, "<h2>$1</h2>");
+    html = html.replace(/^# (.*$)/gim, "<h1>$1</h1>");
 
-    // ------------------------------
-    // 3. TABLES (Fixed implementation)
-    // ------------------------------
-    output = output.replace(
-        /^\|(.+)\|\s*\n\|([-:\s|]+)\|\s*\n((?:^\|.+\|\s*\n?)+)/gm,
-        (match, header, align, rows) => {
-            // Process headers
-            const headerCells = header
-                .split('|')
-                .map((h: string) => h.trim())
-                .filter(Boolean)
-                .map((h: string) => `<th>${h}</th>`)
-                .join('');
+    // === Horizontal Rule ===
+    html = html.replace(/^---$/gim, "<hr>");
+    html = html.replace(/^\*\*\*$/gim, "<hr>");
 
-            // Process alignment
-            const alignCells = align
-                .split('|')
-                .map((a: string) => a.trim())
-                .filter(Boolean)
-                .map((a: string) => {
-                    if (a.startsWith(':') && a.endsWith(':')) return 'center';
-                    if (a.endsWith(':')) return 'right';
-                    return 'left';
-                });
+    // === Blockquotes ===
+    html = html.replace(/^> (.*$)/gim, "<blockquote>$1</blockquote>");
 
-            // Process rows
-            const rowLines = rows.trim().split('\n');
-            const rowCells = rowLines.map((row: string) => {
-                const cells = row
-                    .split('|')
-                    .map((c: string) => c.trim())
-                    .filter(Boolean)
-                    .map((cell, index) =>
-                        `<td style="text-align: ${alignCells[index] || 'left'}">${cell}</td>`
-                    )
-                    .join('');
-                return `<tr>${cells}</tr>`;
-            }).join('');
+    // === Tables - Enhanced detection ===
+    const tableRegex = /(\|.*\|.*\n)((?:\|.*\|.*\n)*)(?=\n|$)/g;
+    html = html.replace(tableRegex, (match, headerRow, bodyRows) => {
+        if (!headerRow.includes('|')) return match;
 
-            return `<table><thead><tr>${headerCells}</tr></thead><tbody>${rowCells}</tbody></table>`;
+        const headers = headerRow.split('|').slice(1, -1).map((h: string) =>
+            `<th>${h.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</th>`
+        ).join('');
+
+        const rows: string[] = [];
+        if (bodyRows) {
+            bodyRows.split('\n').forEach((row: string) => {
+                if (row.includes('|')) {
+                    const cells = row.split('|').slice(1, -1).map((cell: string) =>
+                        `<td>${cell.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</td>`
+                    ).join('');
+                    rows.push(`<tr>${cells}</tr>`);
+                }
+            });
         }
-    );
 
-    // ------------------------------
-    // 4. LISTS (Fixed implementation)
-    // ------------------------------
-
-    // Process ordered lists
-    output = output.replace(/^(\d+)\.\s+(.+)$/gm, '<li class="ol-item">$2</li>');
-
-    // Process unordered lists
-    output = output.replace(/^[-*+]\s+(.+)$/gm, '<li class="ul-item">$1</li>');
-
-    // Wrap ordered lists
-    output = output.replace(/(<li class="ol-item">[\s\S]*?<\/li>\s*)+/g, (match) => {
-        const cleaned = match.replace(/class="ol-item"/g, '');
-        return `<ol>${cleaned}</ol>`;
+        return `<table><thead><tr>${headers}</tr></thead><tbody>${rows.join('')}</tbody></table>`;
     });
 
-    // Wrap unordered lists
-    output = output.replace(/(<li class="ul-item">[\s\S]*?<\/li>\s*)+/g, (match) => {
-        const cleaned = match.replace(/class="ul-item"/g, '');
-        return `<ul>${cleaned}</ul>`;
-    });
+    // === Lists - Improved parsing ===
+    const lines = html.split('\n');
+    const result: string[] = [];
+    let inUl = false;
+    let inOl = false;
+    let inCodeBlock = false;
 
-    // ------------------------------
-    // 5. INLINE FORMATTING
-    // ------------------------------
-    output = output.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    output = output.replace(/__([^_]+)__/g, "<strong>$1</strong>");
-
-    output = output.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>");
-    output = output.replace(/_([^_]+)_/g, "<em>$1</em>");
-
-    output = output.replace(/~~([^~]+)~~/g, "<del>$1</del>");
-    output = output.replace(/`([^`]+)`/g, "<code class='inline-code'>$1</code>");
-
-    output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
-        `<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>`
-    );
-
-    // ------------------------------
-    // 6. BLOCKQUOTES
-    // ------------------------------
-    output = output.replace(/^>\s+(.+)$/gm, "<blockquote>$1</blockquote>");
-
-    // ------------------------------
-    // 7. HORIZONTAL RULE
-    // ------------------------------
-    output = output.replace(/^\s*---\s*$/gm, "<hr>");
-    output = output.replace(/^\s*\*\*\*\s*$/gm, "<hr>");
-    output = output.replace(/^\s*___\s*$/gm, "<hr>");
-
-    // ------------------------------
-    // 8. PARAGRAPHS (Improved handling)
-    // ------------------------------
-    const lines = output.split('\n');
-    const processedLines: string[] = [];
-    let currentParagraph: string[] = [];
-
-    const isBlockElement = (line: string): boolean => {
-        const trimmed = line.trim();
-        return /^<(h[1-6]|ul|ol|li|pre|blockquote|table|hr)/.test(trimmed) ||
-            /<\/(h[1-6]|ul|ol|li|pre|blockquote|table|hr)>/.test(trimmed);
-    };
-
-    lines.forEach((line) => {
+    for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
         const trimmed = line.trim();
 
-        if (!trimmed) {
-            // Empty line - flush current paragraph
-            if (currentParagraph.length > 0) {
-                processedLines.push(`<p>${currentParagraph.join(' ')}</p>`);
-                currentParagraph = [];
-            }
-            processedLines.push(''); // Keep empty lines for spacing
-            return;
+        // Skip code blocks
+        if (trimmed.startsWith('```')) {
+            inCodeBlock = !inCodeBlock;
+            result.push(line);
+            continue;
         }
 
-        if (isBlockElement(trimmed)) {
-            // Block element - flush current paragraph and add the block
-            if (currentParagraph.length > 0) {
-                processedLines.push(`<p>${currentParagraph.join(' ')}</p>`);
-                currentParagraph = [];
-            }
-            processedLines.push(trimmed);
-        } else if (trimmed.startsWith('<li') || trimmed.startsWith('</ul>') || trimmed.startsWith('</ol>')) {
-            // List items - flush current paragraph and add list element
-            if (currentParagraph.length > 0) {
-                processedLines.push(`<p>${currentParagraph.join(' ')}</p>`);
-                currentParagraph = [];
-            }
-            processedLines.push(trimmed);
-        } else {
-            // Regular text - add to current paragraph
-            currentParagraph.push(trimmed);
+        if (inCodeBlock) {
+            result.push(line);
+            continue;
         }
-    });
 
-    // Flush any remaining paragraph
-    if (currentParagraph.length > 0) {
-        processedLines.push(`<p>${currentParagraph.join(' ')}</p>`);
+        // Unordered list items
+        if (/^[-*+]\s+/.test(trimmed)) {
+            if (inOl) {
+                result.push('</ol>');
+                inOl = false;
+            }
+            if (!inUl) {
+                result.push('<ul>');
+                inUl = true;
+            }
+            const content = trimmed.replace(/^[-*+]\s+/, '');
+            result.push(`<li>${processInlineFormatting(content)}</li>`);
+        }
+        // Ordered list items
+        else if (/^\d+\.\s+/.test(trimmed)) {
+            if (inUl) {
+                result.push('</ul>');
+                inUl = false;
+            }
+            if (!inOl) {
+                result.push('<ol>');
+                inOl = true;
+            }
+            const content = trimmed.replace(/^\d+\.\s+/, '');
+            result.push(`<li>${processInlineFormatting(content)}</li>`);
+        }
+        // End of lists
+        else {
+            if (inUl) {
+                result.push('</ul>');
+                inUl = false;
+            }
+            if (inOl) {
+                result.push('</ol>');
+                inOl = false;
+            }
+
+            // Process non-list lines with inline formatting
+            if (trimmed && !trimmed.startsWith('<table') && !trimmed.startsWith('<h')) {
+                result.push(processInlineFormatting(line));
+            } else {
+                result.push(line);
+            }
+        }
     }
 
-    // Filter out empty lines and join
-    output = processedLines.filter(line => line !== '').join('\n');
+    // Close any open lists
+    if (inUl) result.push('</ul>');
+    if (inOl) result.push('</ol>');
 
-    // 9. Restore CODE BLOCKS
-    codeBlocks.forEach((block, i) => {
-        output = output.replace(`__CODEBLOCK_${i}__`, block);
-    });
+    html = result.join('\n');
 
-    return output;
+    // === Final paragraph wrapping ===
+    return html
+        .split(/\n\n+/)
+        .map(block => {
+            const trimmed = block.trim();
+            if (!trimmed) return '';
+
+            // Don't wrap these block elements
+            if (
+                trimmed.startsWith('<h') ||
+                trimmed.startsWith('<ul') ||
+                trimmed.startsWith('<ol') ||
+                trimmed.startsWith('<li') ||
+                trimmed.startsWith('<blockquote') ||
+                trimmed.startsWith('<hr') ||
+                trimmed.startsWith('<table') ||
+                trimmed.startsWith('<pre') ||
+                trimmed.startsWith('<p>') ||
+                /^<(ul|ol|li|table|thead|tbody|tr|th|td|blockquote|hr|pre)/.test(trimmed)
+            ) {
+                return block;
+            }
+
+            return `<p>${block.trim()}</p>`;
+        })
+        .join('\n\n');
 }
 
-// Helper
+// Helper function for inline formatting
+function processInlineFormatting(text: string): string {
+    return text
+        .replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/__([^_]+?)__/g, '<strong>$1</strong>')
+        .replace(/\*([^*]+?)\*/g, '<em>$1</em>')
+        .replace(/_([^_]+?)_/g, '<em>$1</em>')
+        .replace(/~~([^~]+?)~~/g, '<del>$1</del>')
+        .replace(/`([^`]+?)`/g, '<code class="ai-inline-code">$1</code>')
+        .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+}

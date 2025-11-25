@@ -1,1 +1,1 @@
-export declare function parseMarkdown(md: string): string;
+export declare function parseMarkdown(text: string): string;
