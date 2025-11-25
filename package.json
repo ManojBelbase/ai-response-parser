@@ -1,6 +1,6 @@
 {
   "name": "ai-response-parser",
-  "version": "1.2.11",
+  "version": "1.2.13",
   "type": "module",
   "description": "React AI Response Parser — Render Markdown with syntax-highlighted code blocks, themes, and dark mode. Ideal for AI code converter, AI coder, code formatter, and code parser in React projects.",
   "keywords": [
@@ -63,5 +63,8 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.47.0",
     "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "ai-response-parser": "^1.2.13"
   }
 }

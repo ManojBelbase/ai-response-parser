@@ -170,9 +170,7 @@ export function parseMarkdown(md: string): string {
     // Filter out empty lines and join
     output = processedLines.filter(line => line !== '').join('\n');
 
-    // ------------------------------
     // 9. Restore CODE BLOCKS
-    // ------------------------------
     codeBlocks.forEach((block, i) => {
         output = output.replace(`__CODEBLOCK_${i}__`, block);
     });

@@ -1,4 +1,4 @@
-import { AIResponseParser } from '../index';
+import { AIResponseParser } from 'ai-response-parser';
 
 const Example = () => {
 

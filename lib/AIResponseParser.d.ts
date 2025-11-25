@@ -1,10 +1,9 @@
-import React from "react";
-import { ThemeName } from "./themes/themes";
-type Props = {
+import { themes } from "./themes";
+interface Props {
     content: string;
-    themeName?: ThemeName;
+    themeName?: keyof typeof themes;
     textColor?: string;
     className?: string;
-};
+}
 export declare const AIResponseParser: React.FC<Props>;
 export {};
