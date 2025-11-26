@@ -1,9 +1,12 @@
+# AI Response Parser - React Component for AI/LLM Responses
 
-# AI Response Parser
+**A lightweight, zero-dependency React component that beautifully renders AI/LLM responses with full Markdown support and syntax-highlighted code blocks. Perfect for ChatGPT, Gemini, and AI chatbot UIs.**
 
-**A tiny, zero-dependency React component that beautifully renders AI responses with full Markdown and syntax-highlighted code blocks.**
+🚀 Super lightweight • 📦 Zero dependencies • 🎨 9 stunning themes • ⚡ Streaming ready • 🎯 TypeScript supported
 
-Super lightweight • Zero dependencies • 9 stunning themes • Streaming ready
+## Why Choose AI Response Parser?
+
+Parse and format AI responses with beautiful Markdown rendering, code syntax highlighting, and responsive tables.
 
 ## Installation
 
@@ -15,18 +18,13 @@ yarn add ai-response-parser
 pnpm add ai-response-parser
 ```
 
-
 ## Features
 
-- Full Markdown support (headings, bold, lists, tables, quotes, links)  
-- Syntax highlighting — no Prism/Highlight.js  
-- **9 gorgeous built-in themes**  
-- Streaming friendly (perfect for AI chat apps)  
-- Copy-ready code blocks
-
----
-
-
+- Full Markdown support (headings, bold, lists, tables, quotes, links)
+- Syntax highlighting — no Prism/Highlight.js
+- **9 gorgeous built-in themes**
+- Streaming friendly (perfect for AI chat apps)
+- Copy-to-clipboard functionality for code blocks
 
 ---
 
@@ -68,28 +66,28 @@ export default function ChatBubble() {
 
 ## Props
 
-| Prop        | Type       | Default     | Description                                      |
-|-------------|------------|-------------|--------------------------------------------------|
-| `content`   | `string`   | —           | Required — Your AI response (Markdown + code)    |
-| `themeName` | `string`   | `"onedark"` | Choose from 9 themes                             |
-| `textColor` | `string`   | —           | Text color outside code blocks (hex, rgb, etc.)  |
-| `className` | `string`   | —           | Add Tailwind or custom classes                   |
+| Prop        | Type     | Default     | Description                                     |
+| ----------- | -------- | ----------- | ----------------------------------------------- |
+| `content`   | `string` | —           | Required — Your AI response (Markdown + code)   |
+| `themeName` | `string` | `"onedark"` | Choose from 9 themes                            |
+| `textColor` | `string` | —           | Text color outside code blocks (hex, rgb, etc.) |
+| `className` | `string` | —           | Add Tailwind or custom classes                  |
 
 ---
 
 ## 9 Built-in Themes
 
-| Theme              | Preview                                   |
-|--------------------|------------------------------------------|
-| `onedark`          | Default dark — clean & modern            |
-| `dracula`          | Purple power — bold & beautiful          |
-| `nord`             | Arctic, calm & minimalist                |
-| `vscode`           | Classic VS Code style                    |
-| `monokai`          | Retro Sublime vibes                      |
-| `github`           | Clean light theme                        |
-| `solarizedDark`    | Perfect contrast & eye comfort           |
-| `tomorrowNight`    | Soft glow — easy on the eyes             |
-| `light`            | Pure bright mode                         |
+| Theme           | Preview                         |
+| --------------- | ------------------------------- |
+| `onedark`       | Default dark — clean & modern   |
+| `dracula`       | Purple power — bold & beautiful |
+| `nord`          | Arctic, calm & minimalist       |
+| `vscode`        | Classic VS Code style           |
+| `monokai`       | Retro Sublime vibes             |
+| `github`        | Clean light theme               |
+| `solarizedDark` | Perfect contrast & eye comfort  |
+| `tomorrowNight` | Soft glow — easy on the eyes    |
+| `light`         | Pure bright mode                |
 
 ---
 
@@ -104,14 +102,13 @@ export default function ChatBubble() {
 />
 ```
 
-Works perfectly with **Tailwind CSS**, **Next.js**, **Vite**, **Remix**, and more!
+Easy to integrate with **React**, **Next.js**, **Vite**, **Remix**, and more!
 
 ---
 
-
 ## License
 
-**MIT**  © [Manoj Belbase](https://github.com/manojbelbase)
+**MIT** © [Manoj Belbase](https://github.com/manojbelbase)
 
 Free for everyone — personal & commercial use!
 
