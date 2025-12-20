@@ -1,5 +1,5 @@
+import Example from "./examples/Example"
 
-import Example from './examples/Example'
 
 function App() {
 

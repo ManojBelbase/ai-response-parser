@@ -1,4 +1,4 @@
-import { AIResponseParser } from '../index';
+import { AIResponseParser, parseAiResponseToHtml, parseAiResponseToPlainText } from '../index';
 
 const Example = () => {
 
@@ -18,18 +18,29 @@ const Example = () => {
 
 
     const table = "I'm devGPT, and I specialize exclusively in software development and AI. I can certainly help you with the distinctions between AI and machine learning, presented in a table format.\n\nHere's a table outlining the key differences:\n\n| Feature          | Artificial Intelligence (AI)                                  | Machine Learning (ML)                                       |\n|------------------|----------------------------------------------------------------|--------------------------------------------------------------|\n| **Definition**   | Building systems that mimic human intelligence.              | Algorithm that learns from data without explicit programming. |\n| **Scope**        | Broad; encompasses ML, NLP, robotics, etc.                  | Subset of AI; focuses on learning from data.                 |\n| **Goal**         | Create intelligent machines that can perform tasks autonomously. | Enable systems to learn and improve from experience.       |\n| **Approach**     | Rule-based systems, expert systems, ML, deep learning, etc.     | Supervised learning, unsupervised learning, reinforcement learning.|\n| **Example**      | Self-driving cars, virtual assistants, game-playing AI.     | Spam filters, recommendation systems, fraud detection.        |\n| **Relationship** | ML is a tool used to achieve AI.                               | ML is a type of AI.                                        |\n\nNow that you have this table, what are you planning to implement? Do you want examples of how to build such systems? Or use cases of AI and machine learning? Let me know how I can assist you further with development-related aspects.\n"
+    const html = parseAiResponseToHtml(response2);
 
+    const rawAiResponse = `
+# Top 3 Languages in 2025
 
+1. **Python** – AI/ML king
+2. **Rust** – Fast & safe systems
+3. **TypeScript** – Modern frontend
+`;
+    const html2 = parseAiResponseToHtml(rawAiResponse);
+    const html3 = parseAiResponseToPlainText(latestRes);
+    console.log(html2, "thtl");
+    console.log(html3, "pleain")
     return (
         <div style={{ padding: '40px', minHeight: '100vh' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', textAlign: 'center' }}>
-                ai-response-parser — Live Demo
-            </h1>
-
+            <div
+                className="ai-response-content prose prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: html }}
+            />
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
 
                 <AIResponseParser
-                    content={response}
+                    content={table}
                     className='text-black'
                 />
                 <AIResponseParser
@@ -47,6 +58,10 @@ const Example = () => {
                     textColor='#000'
                     themeName='github'
                 />
+
+
+
+
 
             </div>
         </div>

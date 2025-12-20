@@ -1,6 +1,6 @@
 # AI Response Parser - React Component for AI/LLM Responses
 
-**A lightweight, zero-dependency React component that beautifully renders AI/LLM responses with full Markdown support and syntax-highlighted code blocks. Perfect for ChatGPT, Gemini, and AI chatbot UIs.**
+**A lightweight, zero-dependency React component that beautifully renders AI/LLM responses with full Markdown support and syntax-highlighted code blocks. Perfect for ChatGPT, Gemini, Grok, Claude and AI chatbot UIs.**
 
 🚀 Super lightweight • 📦 Zero dependencies • 🎨 9 stunning themes • ⚡ Streaming ready • 🎯 TypeScript supported
 
@@ -25,6 +25,8 @@ pnpm add ai-response-parser
 - **9 gorgeous built-in themes**
 - Streaming friendly (perfect for AI chat apps)
 - Copy-to-clipboard functionality for code blocks
+- **Safe HTML rendering** via `parseAiResponseToHtml` (escapes input, prevents XSS)
+- **Clean plain text export** via `parseAiResponseToPlainText` (ideal for copy buttons or sharing)
 
 ---
 
@@ -89,7 +91,78 @@ export default function ChatBubble() {
 | `tomorrowNight` | Soft glow — easy on the eyes    |
 | `light`         | Pure bright mode                |
 
----
+## Core Utilities
+
+The package exports two main utilities for processing AI/LLM responses:
+
+| Utility                        | Returns     | Description                                                                 |
+|--------------------------------|-------------|-----------------------------------------------------------------------------|
+| `parseAiResponseToHtml`        | `string`    | Converts raw AI response to **safe HTML** with proper Markdown rendering (headers, lists, tables, bold, etc.) |
+| `parseAiResponseToPlainText`   | `string`    | Converts raw AI response to **clean plain text** — removes all Markdown symbols, perfect for copying or plain-text sharing |
+
+### 1. parseAiResponseToHtml – Rich HTML Rendering
+
+This function turns AI-generated Markdown into structured HTML, ideal for beautiful display in your UI.
+
+```ts
+import { parseAiResponseToHtml } from 'ai-response-parser';
+
+const rawAiResponse = `
+# Top 3 Languages in 2025
+
+1. **Python** – AI/ML king
+2. **Rust** – Fast & safe systems
+3. **TypeScript** – Modern frontend
+`;
+
+const html = parseAiResponseToHtml(rawAiResponse);
+
+// Output (safe HTML string)
+console.log(html);
+// <h1>Top 3 Languages in 2025</h1>
+// <ol>
+//   <li><strong>Python</strong> – AI/ML king</li>
+//   <li><strong>Rust</strong> – Fast & safe systems</li>
+//   <li><strong>TypeScript</strong> – Modern frontend</li>
+// </ol>
+
+Use case: Pass the result to dangerouslySetInnerHTML component for rich rendering.
+
+```
+
+### 2. parseAiResponseToPlainText – Clean Plain Text
+
+This function strips all formatting and gives you readable, copy-paste-friendly plain text.
+
+```tsx
+import { parseAiResponseToPlainText } from 'ai-response-parser';
+
+const rawAiResponse = `
+# Top 3 Languages in 2025
+
+1. **Python** – AI/ML king
+2. **Rust** – Fast & safe systems
+3. **TypeScript** – Modern frontend
+`;
+
+const plainText = parseAiResponseToPlainText(rawAiResponse);
+
+// Output (clean plain text)
+console.log(plainText);
+// Top 3 Languages in 2025
+
+// Python – AI/ML king
+// Rust – Fast & safe systems
+// TypeScript – Modern frontend
+
+
+Use case: Add a "Copy as plain text" button, share in emails, or use in <textarea> for easy copying.
+
+
+```
+Both utilities handle common AI artifacts (like escaped characters \n, \*, etc.) and are designed to work seamlessly with streaming responses.
+
+
 
 ## More Examples
 

@@ -1,7 +1,7 @@
 import { CodeBlock } from "./components";
+import { parseAiResponseToHtml } from "./features";
 import { getThemeStyles } from "./styles";
 import { themes } from "./themes";
-import { parseMarkdown } from "./utils";
 
 interface Props {
     content: string;
@@ -38,7 +38,7 @@ export const AIResponseParser: React.FC<Props> = ({
                     <div
                         key={i}
                         className="ai-parser-root"
-                        dangerouslySetInnerHTML={{ __html: parseMarkdown(part) }}
+                        dangerouslySetInnerHTML={{ __html: parseAiResponseToHtml(part) }}
                     />
                 );
             })}
