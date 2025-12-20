@@ -2,7 +2,7 @@
 
 **A lightweight, zero-dependency React component that beautifully renders AI/LLM responses with full Markdown support and syntax-highlighted code blocks. Perfect for ChatGPT, Gemini, Grok, Claude and AI chatbot UIs.**
 
-🚀 Super lightweight • 📦 Zero dependencies • 🎨 9 stunning themes • ⚡ Streaming ready • 🎯 TypeScript supported
+Super lightweight • Zero dependencies • 9 stunning themes • Streaming ready • TypeScript supported
 
 ## Why Choose AI Response Parser?
 
