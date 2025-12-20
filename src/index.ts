@@ -1,3 +1,3 @@
 export { AIResponseParser } from './AIResponseParser';
-export * from './features'
+export { parseAiResponseToHtml, parseAiResponseToPlainText } from './features'
 export * from './types'

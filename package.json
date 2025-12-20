@@ -1,6 +1,6 @@
 {
   "name": "ai-response-parser",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "type": "module",
   "description": "React component to parse and format AI/LLM responses with beautiful markdown, syntax-highlighted code blocks, tables, and dark mode support. Perfect for ChatGPT, Gemini, and AI chatbot UIs.",
   "keywords": [
