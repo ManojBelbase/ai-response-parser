@@ -18,7 +18,7 @@ export const AIResponseParser: React.FC<Props> = ({
 }) => {
     const theme = themes[themeName];
 
-    const parts = content.split(/(```[^\n]*\n[\s\S]*?```)/g);
+    const parts = content?.split(/(```[^\n]*\n[\s\S]*?```)/g);
 
     return (
         <div className={`ai-parser-root ${className}`}>
