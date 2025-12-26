@@ -12,7 +12,7 @@ export function getThemeStyles(theme: Theme, textColor: string) {
 
     /* Paragraphs */
     .ai-parser-root p {
-      margin: 0 0 16px 0;
+      margin: 0 0 0 0;
     }
 
     /* Headers */
@@ -72,14 +72,11 @@ export function getThemeStyles(theme: Theme, textColor: string) {
 
 /* Tables — clean & pro with responsive scroll */
 .ai-parser-root table {
-  border-collapse: collapse;
+border-collapse: collapse;
   width: 100%;
-  margin: 20px 0;
-  overflow: hidden;
+  margin: 16px 0; /* Reduced from 20px to match paragraph rhythm */
   display: block;
   overflow-x: auto;
-  white-space: nowrap;
-  max-width: 100%;
 }
 
 /* Optional: Add a container for better control */

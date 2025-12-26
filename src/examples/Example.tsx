@@ -31,40 +31,42 @@ const Example = () => {
     const html3 = parseAiResponseToPlainText(latestRes);
     console.log(html2, "thtl");
     console.log(html3, "pleain")
+    const testBg = `Okay, I can definitely help you with that! Here's how to determine if a year is a leap year in 12 popular programming languages, along with explanations and best practices. After each example, I'll offer to show you how to implement this in a larger project.
+
+`
     return (
-        <div style={{ padding: '40px', minHeight: '100vh' }}>
-            <div
-                className="ai-response-content prose prose-invert max-w-none"
-                dangerouslySetInnerHTML={{ __html: html }}
+        <div>
+            <p style={{ backgroundColor: "blue", color: "white", padding: "10px" }}>
+                <AIResponseParser
+                    content={testBg}
+                    textColor='#ffffff'
+                />
+            </p>
+
+
+
+            <AIResponseParser
+                content={response2}
+                textColor='#fff'
+                themeName='github'
             />
-            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <AIResponseParser
+                content={res}
+                textColor='#000'
+                themeName='github'
+            />
+            <AIResponseParser
+                content={table}
+                textColor='#ffffff'
+                themeName='light'
 
-                <AIResponseParser
-                    content={table}
-                    className='text-black'
-                />
-                <AIResponseParser
-                    content={response2}
-                    textColor='#000'
-                    themeName='github'
-                />
-                <AIResponseParser
-                    content={res}
-                    textColor='#000'
-                    themeName='github'
-                />
-                <AIResponseParser
-                    content={table}
-                    textColor='#000'
-                    themeName='github'
-                />
+            />
 
 
 
 
 
-            </div>
-        </div>
+        </div >
     );
 };
 

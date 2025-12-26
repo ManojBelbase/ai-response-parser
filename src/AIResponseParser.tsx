@@ -12,15 +12,15 @@ interface Props {
 
 export const AIResponseParser: React.FC<Props> = ({
     content,
-    themeName = "tomorrowNight",
-    textColor = "#000",
+    themeName = "light",
+    textColor = "#000000",
     className = "",
 }) => {
     const theme = themes[themeName];
 
     const safeContent =
         typeof content === "string"
-            ? content
+            ? content.trim()
             : JSON.stringify(content, null, 2);
 
     const parts = safeContent.split(/(```[^\n]*\n[\s\S]*?```)/g);

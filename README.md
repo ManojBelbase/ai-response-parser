@@ -1,8 +1,10 @@
-# AI Response Parser - React Component for AI/LLM Responses
+# AI Response Parser - AI Response Utilities & React Component
 
-**A lightweight, zero-dependency React component that beautifully renders AI/LLM responses with full Markdown support and syntax-highlighted code blocks. Perfect for ChatGPT, Gemini, Grok, Claude and AI chatbot UIs.**
+AI Response Parser offers **both utility functions and a ready-to-use React component** to handle AI/LLM responses effortlessly — from parsing raw text to rendering beautifully formatted content in your UI.
 
-Super lightweight • Zero dependencies • 9 stunning themes • Streaming ready • TypeScript supported
+Whether you need HTML output, plain text, or a drop-in React renderer, everything is included.
+
+Super lightweight • Zero dependencies • 9 stunning themes for code block • Streaming ready • TypeScript supported
 
 ## Why Choose AI Response Parser?
 
@@ -175,7 +177,7 @@ Both utilities handle common AI artifacts (like escaped characters \n, \*, etc.)
 />
 ```
 
-Easy to integrate with **React**, **Next.js**, **Vite**, **Remix**, and more!
+Easy to integrate with **JS/TS** **React**, **Next.js**, **Vite**, **Remix**, and more!
 
 ---
 
